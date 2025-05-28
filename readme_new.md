@@ -40,9 +40,9 @@
 1. **Usuário** chama `POST /dispatch` em **logistics-api**.  
 2. PHP cria mensagem (JSON) e **publica** na fila `logistics`.  
 3. **events-api** mantém um **consumidor** permanente; quando a mensagem chega, é lida, convertida em objeto Python e adicionada ao histórico de eventos.  
-4. Qualquer acesso a `GET /events` mostrará tanto os **alertas** (HTTP) quanto os **despachos** (RabbitMQ).
+4. Qualquer acesso a `GET /events` mostrará tanto os **alertas** (HTTP) quanto os despachos (RabbitMQ).
 
-*Interface de administração:* http://localhost:15672  
+*Interface RabbirMq:* http://localhost:15672
 (login padrão: guest / guest)  
 
 
