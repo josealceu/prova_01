@@ -9,8 +9,8 @@
 | **redis** (6379) | imagem oficial | – | Cache in-memory usado por Node e Python. |
 | **rabbitmq** (5672 / 15672) | imagem oficial | – | Mensageria assíncrona; UI em http://localhost:15672 (guest/guest). |
 
-**Executar:**  
-```bash
+## 2. Como executar a aplicação
+
 
 é necessário ter a Stack do Docker e Docker Compose instalado no computador. Acessar o diretório e rodar:
 | **docker compose up -d**          
