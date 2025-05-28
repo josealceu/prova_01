@@ -18,26 +18,19 @@
       
 
 
-
 Síncrono (HTTP) – POST /alert do Node envia direto para POST /event do Python.
 
 Assíncrono (RabbitMQ) – POST /dispatch do PHP publica na fila logistics; Python consome em segundo plano e converte em evento # levanta tudo
 
 
 
-
-onde é usado:
-
-3. Onde o Redis é usado
+## 1 3. Onde o Redis é usado
 API	Chave	Conteúdo	TTL
 Node (sensors-api)	sensor_cache	última medição simulada	30 s
 Python (events-api)	events_cache	lista JSON de todos os eventos	substituído a cada alteração
 
 
---------------------------------------------------
-
-Como a fila RabbitMQ entra no fluxo.
-
+## 1 4. Como a fila RabbitMQ entra no fluxo
 POST /dispatch → PHP cria mensagem JSON.
 
 Mensagem cai na fila logistics (RabbitMQ).
@@ -45,3 +38,6 @@ Mensagem cai na fila logistics (RabbitMQ).
 events-api (Python) roda um consumidor que, ao receber a mensagem, salva-a na lista de eventos.
 
 Qualquer GET /events mostrará tanto alertas quanto despachos.
+
+
+
