@@ -14,7 +14,7 @@ Aplicação está em Docker
 |-----------------|-----------|---------------|--------------------|
 | **sensors-api** (3000) | Node.js |`npm start (Comando do Dockerfile)` | • Faz leituras **simuladas** de temperatura / pressão (`GET /sensor-data`).<br>• manda **alertas** para a API Python (`POST /alerta`). |
 | **eventos-api** (5000)  | Python| `python app.py(Comando do Dockerfile)` | • **Recebe** alertas via HTTP (`POST /evento`).<br>• **Consome** texto de logística que veio da fila RabbitMQ.<br>• manda o  histórico (`GET /eventos`). |
-| **logistics-api** (8000) | PHP | `php -S 0.0.0.0:8000 (Comando do Dockerfile)` | • Lista **equipamentos** simulados (`GET /equipamentos`).<br>• Publica **despachos urgentes** na fila RabbitMQ (`POST /dispatch`). |
+| **logistica-api** (8000) | PHP | `php -S 0.0.0.0:8000 (Comando do Dockerfile)` | • Lista **equipamentos** simulados (`GET /equipamentos`).<br>• Publica **despachos urgentes** na fila RabbitMQ (`POST /dispatch`). |
 
 `
 
@@ -24,7 +24,7 @@ Aplicação está em Docker
 
 
 * **Passo 1 – Síncrono:** `POST /alerta` envia JSON do Node para o Python.  
-* **Passo 2 – Assíncrono:** PHP publica na fila **logistics** do RabbitMQ.  
+* **Passo 2 – Assíncrono:** PHP publica na fila **logistica** do RabbitMQ.  
 * **Passo 3 – Consumo:** consumidor em `eventos-api` lê cada mensagem e armazena como novo evento.
 
 ---
@@ -40,8 +40,8 @@ Aplicação está em Docker
 
 ## 4 ▪ Como a fila RabbitMQ entra no fluxo
 
-1. **Usuário** chama `POST /dispatch` em **logistics-api**.  
-2. PHP cria mensagem (JSON) e **publica** na fila `logistics`.  
+1. **Usuário** chama `POST /dispatch` em **logistica-api**.  
+2. PHP cria mensagem (JSON) e **publica** na fila `logistica`.  
 3. **eventos-api** mantém um **consumidor** permanente; quando a mensagem chega, é lida, convertida em objeto Python e adicionada ao histórico de eventoos.  
 4. Qualquer acesso a `GET /eventos` mostrará tanto os **alertaas** (HTTP) quanto os despachos (RabbitMQ).
 

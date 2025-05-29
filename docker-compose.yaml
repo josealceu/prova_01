@@ -27,7 +27,7 @@ services:
       - REDIS_HOST=redis
       - RABBIT_HOST=rabbitmq
 
-  logistics-api:
+  logistica-api:
     build: ./api-logistica-php
     ports: ["8000:8000"]
     depends_on: [rabbitmq]

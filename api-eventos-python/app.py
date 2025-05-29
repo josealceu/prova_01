@@ -26,17 +26,17 @@ def get_eventos():
 def consume_rabbit():
     conn = pika.BlockingConnection(pika.ConnectionParameters(os.getenv("RABBIT_HOST","rabbitmq")))
     ch   = conn.channel()
-    ch.queue_declare(queue='logistics')
+    ch.queue_declare(queue='logistica')
 
     def cb(_ch, _method, _props, body):
         eventos.append({
-            "type": "logistics",
+            "type": "logistica",
             "payload": json.loads(body.decode()),
             "when": datetime.datetime.utcnow().isoformat()
         })
         r.set(CACHE_KEY, json.dumps(eventos))
 
-    ch.basic_consume(queue='logistics', on_message_callback=cb, auto_ack=True)
+    ch.basic_consume(queue='logistica', on_message_callback=cb, auto_ack=True)
     ch.start_consuming()
 
 if __name__ == '__main__':
