@@ -34,6 +34,9 @@ Aplicação está em Docker:
 * **Passo 2 – Comunicação Assíncrono:** PHP manda na fila **logistica** do RabbitMQ.  
 * **Passo 3 – Consumo:** Consome os dados em `eventos-api` ao qual lê cada mensagem e armazena como novo evento.
 
+![image](https://github.com/user-attachments/assets/a083c7b6-a2b6-43d7-a9d2-e4a9c21037f6)
+
+
 ---
 
 ## 3 ▪ Onde o Redis é usado
