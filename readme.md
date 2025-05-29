@@ -20,11 +20,8 @@ Aplicação está em Docker:
 
 | Serviço | Linguagem Utilizada | Comando para rodar | Objetivo |
 |-----------------|-----------|---------------|--------------------|
-
 | sensors-api (3000) | Node.js |npm start (Comando do Dockerfile) | Faz leituras simuladas de temperatura / pressão (GET /sensor-data)<br>; manda alertas para a API Python (POST /alerta) |
-
 | eventos-api (5000) | Python| python app.py(Comando do Dockerfile) | Recebe alertas via HTTP (POST /evento); Consome texto de logística que veio da fila RabbitMQ; manda o histórico (GET /eventos) |
-
 | logistica-api (8000) | PHP | php -S 0.0.0.0:8000 (Comando do Dockerfile) | Lista equipamentos simulados (GET /equipamentos); publica despachos urgentes na fila RabbitMQ (POST /dispatch) |
 
 
