@@ -25,10 +25,10 @@ app.get('/sensor-data', async (_, res) => {
   res.json(data);
 });
 
-app.post('/alert', async (req, res) => {
+app.post('/alerta', async (req, res) => {
   const payload = { ...req.body, source: 'sensor-api', when: new Date().toISOString() };
   try {
-    await axios.post(process.env.EVENTS_URL, payload);
+    await axios.post(process.env.eventoS_URL, payload);
     res.status(202).json({ ok: true });
   } catch (err) {
     res.status(502).json({ error: err.message });

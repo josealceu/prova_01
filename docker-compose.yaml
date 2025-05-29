@@ -17,10 +17,10 @@ services:
     depends_on: [redis]
     environment:
       - REDIS_HOST=redis
-      - EVENTS_URL=http://events-api:5000/event
+      - EVENTOS_URL=http://eventos-api:5000/evento
 
-  events-api:
-    build: ./api-events-python
+  eventos-api:
+    build: ./api-eventos-python
     ports: ["5000:5000"]
     depends_on: [redis, rabbitmq]
     environment:
@@ -28,7 +28,7 @@ services:
       - RABBIT_HOST=rabbitmq
 
   logistics-api:
-    build: ./api-logistics-php
+    build: ./api-logistica-php
     ports: ["8000:8000"]
     depends_on: [rabbitmq]
     environment:

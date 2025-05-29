@@ -1,11 +1,11 @@
 # 1) Leitura de sensores (Node + Redis)
 curl localhost:3000/sensor-data
 
-# 2) Alerta de alta pressão (Node → Python)
-curl -X POST localhost:3000/alert -H "Content-Type: application/json" -d '{"msg":"pressão alta"}'
+# 2) alertaa de alta pressão (Node → Python)
+curl -X POST localhost:3000/alerta -H "Content-Type: application/json" -d '{"msg":"pressão alta"}'
 
 # 3) Despacho logístico urgente (PHP → RabbitMQ → Python)
 curl -X POST localhost:8000/dispatch -H "Content-Type: application/json" -d '{"equipment":"válvula","priority":"high"}'
 
-# 4) Ver todos os eventos consolidados (Python + Redis)
-curl localhost:5000/events
+# 4) Ver todos os eventoos consolidados (Python + Redis)
+curl localhost:5000/eventos

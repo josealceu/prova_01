@@ -4,23 +4,23 @@ import redis, pika
 
 # ------------- Redis -----------------
 r = redis.Redis(host=os.getenv("REDIS_HOST", "redis"), port=6379, decode_responses=True)
-CACHE_KEY = "events_cache"
+CACHE_KEY = "eventos_cache"
 
 # ------------- Flask -----------------
 app = Flask(__name__)
-events = []   # memória local
+eventos = []   # memória local
 
-@app.post('/event')
-def post_event():
+@app.post('/evento')
+def post_evento():
     data = request.get_json(force=True)
-    events.append(data)
-    r.set(CACHE_KEY, json.dumps(events))
+    eventos.append(data)
+    r.set(CACHE_KEY, json.dumps(eventos))
     return {"saved": True}, 201
 
-@app.get('/events')
-def get_events():
+@app.get('/eventos')
+def get_eventos():
     cached = r.get(CACHE_KEY)
-    return jsonify(json.loads(cached) if cached else events)
+    return jsonify(json.loads(cached) if cached else eventos)
 
 # ------------- RabbitMQ consumer -----
 def consume_rabbit():
@@ -29,12 +29,12 @@ def consume_rabbit():
     ch.queue_declare(queue='logistics')
 
     def cb(_ch, _method, _props, body):
-        events.append({
+        eventos.append({
             "type": "logistics",
             "payload": json.loads(body.decode()),
             "when": datetime.datetime.utcnow().isoformat()
         })
-        r.set(CACHE_KEY, json.dumps(events))
+        r.set(CACHE_KEY, json.dumps(eventos))
 
     ch.basic_consume(queue='logistics', on_message_callback=cb, auto_ack=True)
     ch.start_consuming()
