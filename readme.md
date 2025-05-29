@@ -19,7 +19,6 @@ Aplicação está em Docker:
 ## 1 ▪ O que cada API faz & como executá-la
 
 | Serviço | Linguagem Utilizada | Comando para rodar | Objetivo |
-
 |-----------------|-----------|---------------|--------------------|
 
 | sensors-api (3000) | Node.js |npm start (Comando do Dockerfile) | Faz leituras simuladas de temperatura / pressão (GET /sensor-data); manda alertas para a API Python (POST /alerta) |
